@@ -27,10 +27,6 @@
 		zmk,battery = &vbatt;
 	};
 
-	sensors {
-		compatible = "zmk,keymap-sensors";
-	};
-
 	default_transform: keymap_transform_0 {
 		compatible = "zmk,matrix-transform";
 		columns = <15>;
