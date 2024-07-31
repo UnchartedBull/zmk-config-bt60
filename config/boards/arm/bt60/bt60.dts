@@ -22,7 +22,6 @@
 		zephyr,flash = &flash0;
 		zmk,kscan = &kscan0;
 		zmk,underglow = &led_strip;
-		zmk,backlight = &backlight;
 		zmk,matrix_transform = &default_transform;
 		zmk,battery = &vbatt;
 	};
@@ -44,6 +43,7 @@
 	kscan0: kscan_0 {
 		compatible = "zmk,kscan-gpio-matrix";
 		diode-direction = "col2row";
+		wakeup-source;
 
 		col-gpios
 			= <&gpio1 11 GPIO_ACTIVE_HIGH>
@@ -79,14 +79,6 @@
 		control-gpios = <&gpio0 13 GPIO_ACTIVE_HIGH>;
 	};
 
-	backlight: pwmleds {
-		compatible = "pwm-leds";
-		label = "Backlight LEDs";
-		pwm_led_0 {
-			pwms = <&pwm0 0 10000 PWM_POLARITY_NORMAL>;
-		};
-	};
-
 	leds {
 		compatible = "gpio-leds";
 		blue_led: led_0 {
@@ -106,13 +98,6 @@
 
 &adc {
 	status = "okay";
-};
-
-&pwm0 {
-	status = "okay";
-	pinctrl-0 = <&pwm0_default>;
-	pinctrl-1 = <&pwm0_sleep>;
-	pinctrl-names = "default", "sleep";
 };
 
 &gpiote {
